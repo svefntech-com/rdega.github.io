@@ -123,14 +123,13 @@ header {
 nav {
     margin: 0;
     padding: 0;
-    position: fixed;
 }
 
 #logo a {
     float: left;
     display: initial;
     font-size: 32px;
-    color: #705ecf;
+    color: #05b993;
     text-shadow: 2px 5px 3px rgba(0, 0, 0, 0.06);
     padding: 0;
     font-weight: 600;
