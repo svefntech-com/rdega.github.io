@@ -54,8 +54,8 @@
 							<input type="checkbox" id="drop" />
 							<ul class="menu">
 								<li><a href="index.html">Home</a></li>
-								<li><a href="about.html">About Us</a></li>
-								<!--<li><a href="pricing.html">Pricing</a></li>
+								<!--<li><a href="about.html">About Us</a></li>
+								<li><a href="pricing.html">Pricing</a></li>
 								<li>
 									<label for="drop-2" class="toggle toogle-2">Dropdown <span class="fa fa-angle-down" aria-hidden="true"></span>
 									</label>
@@ -85,24 +85,19 @@
 							</form>
 						</div>
 						<!-- //search -->
-						<!-- download -->
-						<a class="dwn-temps-amkls btn" href="http://w3layouts.com/" target="_blank">
-							<span class="fa fa-cloud-download"></span>
-						</a>
-						<!-- //download -->
 					</div>
 				</div>
 			</div>
 		</header>
 		<!-- //header -->
 
-		<!-- banner -->
+		<!-- banner 
 		<div class="banner_temps-amklspvt-2">
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a href="index.html" class="font-weight-bold">Home</a></li>
 				<li class="breadcrumb-item" aria-current="page">Contact Us</li>
 			</ol>
-		</div>
+		</div>-->
 		<!-- //banner -->
 	</div>
 	<!-- //main banner -->
@@ -117,20 +112,21 @@
 				<div class="col-lg-6 mt-lg-0 mt-5">
 					<!-- contact form grid -->
 					<div class="contact-top1">
-						<form action="#" method="post" class="contact-amk-tems-do">
+						<script src="https://www.google.com/recaptcha/api.js"></script>
+						<form action="mail.php" method="post" class="contact-amk-tems-do" id="contact-form">
 							<div class="form-group">
 								<div class="row">
 									<div class="col-md-6">
 										<label>
 											First name
 										</label>
-										<input class="form-control" type="text" placeholder="Anderson" name="name" required="">
+										<input class="form-control" type="text" placeholder="First Name" name="fname" required="">
 									</div>
 									<div class="col-md-6 mt-md-0 mt-4">
 										<label>
 											Last name
 										</label>
-										<input class="form-control" type="text" placeholder="John" name="name" required="">
+										<input class="form-control" type="text" placeholder="Last Name" name="lname" required="">
 									</div>
 								</div>
 							</div>
@@ -162,10 +158,62 @@
 							</div>
 							<div class="row mt-3">
 								<div class="col-md-12">
-									<button type="submit" class="btn btn-cont-temps-amk btn-block mt-4">Send</button>
+									<button type="submit" class="btn btn-cont-temps-amk btn-block mt-4" name="g-recaptcha-response" data-sitekey="6LcNMKoaAAAAALzfxihCC4Xlg8OJqPTxwO4htwhN" data-callback='onRecaptchaSuccess'>Send</button>
+									<!--<button type="submit" class="btn btn-cont-temps-amk btn-block mt-4" >Send</button>-->
 								</div>
 							</div>
 						</form>
+						<script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
+						<script>
+							const constraints = {
+								fname: {
+									presence: {allowEmpty: false}
+								},
+								lname: {
+									presence: {allowEmpty: false}
+								},
+								mobile: {
+									presence: {allowEmpty: false}
+								},
+								email: {
+									presence: {allowEmpty: false},
+									email: true
+								},
+								message: {
+									presence: {allowEmpty: false}
+								}
+							};
+
+							const form = document.getElementById('contact-form');
+
+							form.addEventListener('submit', function (event) {
+								const formValues = {
+									fname: form.elements.fname.value,
+									lname: form.elements.lname.value,
+									mobile: form.elements.mobile.value,
+									email: form.elements.email.value,
+									message: form.elements.message.value
+								};
+
+								const errors = validate(formValues, constraints);
+
+								if (errors) {
+									event.preventDefault();
+									const errorMessage = Object
+										.values(errors)
+										.map(function (fieldValues) {
+											return fieldValues.join(', ')
+										})
+										.join("\n");
+
+									alert(errorMessage);
+								}
+							}, false);
+
+							function onRecaptchaSuccess () {
+								document.getElementById('contact-form').submit()
+							}
+						</script>
 					</div>
 					<!-- //contact form grid ends here -->
 				</div>
@@ -176,7 +224,7 @@
 
 	<!-- map -->
 	<div class="temps-amkl-map p-4">
-		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d848295.9861393345!2d150.37152490226384!3d-33.846975938661174!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b129838f39a743f%3A0x3017d681632a850!2sSydney+NSW%2C+Australia!5e0!3m2!1sen!2sin!4v1515557909959"></iframe>
+		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d243646.8800631595!2d78.26796136109819!3d17.412627412353388!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb99daeaebd2c7%3A0xae93b78392bafbc2!2sHyderabad%2C%20Telangana%2C%20India!5e0!3m2!1sen!2sus!4v1618439021197!5m2!1sen!2sus"></iframe>
 	</div>
 	<!-- //map -->
 
@@ -190,12 +238,47 @@
 				</div>
 				<h2 class="tittle text-center font-weight-bold">Stay Updated!</h2>
 				<p class="sub-tittle text-center mt-3 mb-sm-5 mb-4">With a subscription profile, you automatically receive updates without having to return to the website and check for changes</p>
-				<form action="#" method="post" class="subscribe-amk-tems pt-2">
+				<form action="subscribe.php" method="post" class="subscribe-amk-tems pt-2">
 					<div class="d-flex subscribe-amk-tems-field">
-						<input class="form-control" type="email" placeholder="Enter your email..." name="email" required="">
-						<button class="btn form-control w-50" type="submit">Subscribe</button>
+						<input class="form-control" type="email" placeholder="Enter your email..." name="semail" required="">
+						<button class="btn form-control w-50" type="submit" name="g-recaptcha-response" data-sitekey="6LcNMKoaAAAAALzfxihCC4Xlg8OJqPTxwO4htwhN" data-callback='onRecaptchaSuccess'>Subscribe</button>
 					</div>
 				</form>
+				<script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
+						<script>
+							const constraints = {
+								semail: {
+									presence: {allowEmpty: false},
+									semail: true
+								},
+							};
+
+							const form = document.getElementById('contact-form');
+
+							form.addEventListener('submit', function (event) {
+								const formValues = {
+									semail: form.elements.semail.value
+								};
+
+								const errors = validate(formValues, constraints);
+
+								if (errors) {
+									event.preventDefault();
+									const errorMessage = Object
+										.values(errors)
+										.map(function (fieldValues) {
+											return fieldValues.join(', ')
+										})
+										.join("\n");
+
+									alert(errorMessage);
+								}
+							}, false);
+
+							function onRecaptchaSuccess () {
+								document.getElementById('contact-form').submit()
+							}
+						</script>
 			</div>
 			<!-- //subscribe -->
 		</div>
