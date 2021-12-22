@@ -22,8 +22,8 @@ if (!empty($_POST)) {
         $allErrors = join('<br/>', $errors);
         $errorMessage = "<p style='color: red;'>{$allErrors}</p>";
     } else {
-        $toEmail = 'support@svefntech.com';
-        $emailSubject = 'New email to Subscribe SVEFNTech';
+        $toEmail = 'support@apeksya.com';
+        $emailSubject = 'New email to Subscribe APEKSYA';
         $headers = ['From' => $semail, 'Reply-To' => $semail, 'Content-type' => 'text/html; charset=iso-8859-1'];
 
         $bodyParagraphs = ["Email: {$semail}"];
